@@ -1,0 +1,61 @@
+{% extends 'base.html' %}  
+{% block content %}
+
+  
+
+    <div class="contain text-center w-max  mt-2 p-1 ">
+      <div class="row mx-auto "   >
+
+        <div class="dropdown ">
+          <button class="btn btn-success  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:1px;">
+            CATEGORIES 
+          </button>
+          <ul class="dropdown-menu dropdown-menu-white" >
+            <li><a href="?"  class="dropdown-item w-75 text-center " >All Items</a></li>
+            <hr>
+            {% for i in catogereis %}
+            <li><a href="?categories={{i.id}}"  class="dropdown-item " >{{i.id}} . {{i.name}}</a></li>
+            {% endfor %}
+          </ul>
+        </div>
+ </div>
+    </div>
+
+
+   
+  <div class="col-lg-12">
+    <div class="container-fluid w-100 ">
+      <div class="row">
+            {% for i in product %}
+            <div class="col ">
+              <div class="mt-4 card  shadow  borer border-rounded rounded-4 p-2" >
+                <img src="{{i.image.url}}" class="card-img-top mx-auto text-center" style="width: 12rem;" alt="..." > 
+                <div class="card-body">
+                  <p class=" h6 card-title larg mt-1">{{i.name}}</p>
+                    <p class="small"><span>&#8377;</span>{{i.price}}&emsp;<del class=" disabled text-secondary"><span>&#8377;</span>{{i.discount}}</del>&emsp;<b class="text-success">%2 off</b></p>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star checked"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <p class="small">
+                    {{i.desc}}
+                  </p>
+
+                  <form action="/product/" method="POST">
+                    {% csrf_token %}
+                  <input name="product" hidden type="text" value='{{i.id}}' />
+                  <input type="submit"  class="btn  border-rounded border-opacity-75 bg-success rounded-5 shadow  w-100 text-white" name="cart" style="height:2rem;font-size: small;height: auto; "  value="Add to Cart" />
+
+                  </form>
+
+                </div>
+           </div>
+          </div> 
+           {% endfor %}
+
+          
+           
+</div>  
+<script src="https://cdn.lordicon.com/pzdvqjsp.js"></script>
+{% endblock %}
