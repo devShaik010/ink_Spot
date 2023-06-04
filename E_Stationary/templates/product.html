@@ -1,7 +1,7 @@
 {% extends 'base.html' %}  
 {% block content %}
 
-  
+  {% load cart %}
 
     <div class="contain text-center w-max  mt-2 p-1 ">
       <div class="row mx-auto "   >
@@ -41,7 +41,7 @@
                     <p class="small">
                     {{i.desc}}
                   </p>
-
+                  {{i | check_cart:request.session.cart }}
                   <form action="/product/" method="POST">
                     {% csrf_token %}
                   <input name="product" hidden type="text" value='{{i.id}}' />

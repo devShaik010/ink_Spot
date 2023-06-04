@@ -161,6 +161,11 @@ def product(request):
         if cart:
             request.session.get('cart').clear()
 
+    # returning empty cart if cart not exixts
+    cart = request.session.get('cart')
+    if not cart:
+        request.session.cart = {}
+    
     product = None
     cat = Categories.all_catogaries()
     categoryID = request.GET.get('categories')
