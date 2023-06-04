@@ -77,6 +77,7 @@ def sign_up(request):
 
 # For Login 
 def login(request):
+    request.session.clear()
     if request.method == "GET":
         return render(request, 'login.html')
     else:
@@ -120,7 +121,7 @@ def book(request):
     user_profile = (request.session.get('name'))
     login_button = None
     if user_profile:
-        login_button = None
+        login_button = ''
     else:
         login_button = "LOGIN"  
 
@@ -141,12 +142,20 @@ def product(request):
 
     if request.method == 'POST':
         pr_id = request.POST.get('product')
+        remove = request.POST.get('remove')
         cart = request.session.get('cart')
 
         if cart:
             quantity = cart.get(pr_id)
             if quantity:
-                cart[pr_id] = quantity+1
+                if remove:
+                    if quantity <= 1:
+                        cart.pop(pr_id)
+                    else:    
+                        cart[pr_id] = quantity-1
+                else:
+                    cart[pr_id] = quantity+1
+
             else:
                 cart[pr_id] = 1
         else:
@@ -154,7 +163,7 @@ def product(request):
             cart[pr_id] = 1
 
         request.session['cart'] = cart         
-        print(request.session['cart'])
+        # print(request.session['cart'])
 
     if request.method == "GET":
         cart = request.POST.get('cart')

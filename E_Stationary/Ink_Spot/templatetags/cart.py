@@ -7,5 +7,12 @@ def check_cart(product , cart):
     for id in keys:
         if int(id) == product.id:
             return True
-    # print(product.name , cart)
     return False;
+
+@register.filter(name='check_count')
+def check_count(product , cart):
+    keys = cart.keys()
+    for id in keys:
+        if int(id) == product.id:
+            return cart.get(id)
+    return 0;

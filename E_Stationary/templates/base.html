@@ -71,12 +71,17 @@
                 {% if login %}
                 {{login}}
                 {% endif %}
+
                 </a></li>
+                {% if user %}
+
+                <li><a class="dropdown-item" href="/login">LOG OUT</a></li>
+                {% else %}
                 <li><a class="dropdown-item" href="/signup/#signup">REGISTER</a></li>
                 <li><a class="dropdown-item" href="/admin" >PARTNER</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">LOG OUT</a></li>
-              </ul>
+                {% endif %}
+              </ul> 
              </li>
 
              
