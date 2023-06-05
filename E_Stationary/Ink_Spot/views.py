@@ -20,7 +20,7 @@ def index(request):
     if user_profile:
         login_button = None
     else:
-        login_button = "LOGIN"  
+        login_button = "Login"  
 
     s_data = {}
     s_data['user'] = user_profile
@@ -60,7 +60,7 @@ def sign_up(request):
         
         elif password != rpassword:
             error_msg = "Password does not macth"
-
+        
         if error_msg:
             return render(request, "signup.html" ,{'error' : error_msg})
 

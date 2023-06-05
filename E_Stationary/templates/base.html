@@ -56,16 +56,26 @@
             <li class="nav-item  ">
               <a class="nav-link active ps-4" href="#" >CONTACT</a>
             </li>
+
+            {% if user %}
+            
+            <li><a class="dropdown-item nav-link ps-4 active  " href="/login">ORDER</a></li>
+            <li><a class="dropdown-item nav-link active ps-4 " href="/login">CART</a></li>
+            {% endif %}
           </ul>
 
+            
+          
           <form class="d-flex">
             <ul class="navbar-nav me-auto  bg-success p-2 rounded shadow-sm mb-lg-0">       
             <li class="nav-item dropdown ">
               <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false" >
                 {% if user %}
-                {{user}}
+                <b class="text-white">{{user}}</b>
                 {% endif %}
               </a>
+
+              
               <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="/login" >
                 {% if login %}
@@ -74,11 +84,11 @@
 
                 </a></li>
                 {% if user %}
-
-                <li><a class="dropdown-item" href="/login">LOG OUT</a></li>
+                
+                <li><a class="dropdown-item" href="/login">logout</a></li>
                 {% else %}
-                <li><a class="dropdown-item" href="/signup/#signup">REGISTER</a></li>
-                <li><a class="dropdown-item" href="/admin" >PARTNER</a></li>
+                <li><a class="dropdown-item" href="/signup/#signup">Register</a></li>
+                <li><a class="dropdown-item" href="/admin" >Partner</a></li>
                 <li><hr class="dropdown-divider"></li>
                 {% endif %}
               </ul> 
@@ -169,6 +179,7 @@
       <!-- ---- Copy right --- -->
       </div>
     </footer>
+    
     <script src="{% static 'js/main.js' %}"></script>
   </div>
   </body>

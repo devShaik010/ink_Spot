@@ -1,6 +1,28 @@
-{% extends 'base.html' %}
-    
- {% block content %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ink Spot _ E-Stationery</title>
+    {% load static %}
+    <link rel="icon" href="https://raw.githubusercontent.com/devShaik010/image-hosting/main/ink_spot_logo.svg" type="image/gif" sizes="16x16">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  </head>
+
+   <style>
+      @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+      .form-control:focus {
+      border-color: #023006;
+      box-shadow: inset 0 1px 1px rgba(187, 226, 196, 0), 0 0 8px rgba(239, 243, 241, 0.637);
+        }
+        .fontsize{
+          font-size: small;
+        }
+  </style>
+  
+    <body>
+      
      {% if error %}
      <div class="container">
       <h3 class="bg-danger p-2 text-white text-shadow border rounded text-center shadow">
@@ -10,7 +32,7 @@
     {% endif %}
     <div class="container">
       
-      <section id="signup" class="vh-75" style="background-color:white;">
+      <section id="signup" class="vh-75 mt-5" style="background-color:white;">
         <div class="container h-100">
           <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
@@ -23,7 +45,7 @@
                       <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">Login</p>
 
                       <!-- ------form ragisteration-- -->
-                      <form class="mx-1 mx-md-4" method="POST" action="/login/" >
+                      <form class="mx-1 mx-md-4 mt-4" method="POST" action="/login/" >
                       {% csrf_token %}
       
                         <div class="d-flex flex-row align-items-center mb-4">
@@ -39,6 +61,7 @@
                           <div class="form-outline flex-fill mb-0">
                             <input type="password" id="" name="password" class="form-control" />
                             <label class="form-label" for="form3Example4c">Password</label>
+                            <a href="/signup/#signup" class="text-success">creat new account</a>
                           </div>
                         </div>
 
@@ -51,12 +74,7 @@
                       </form>
       
                     </div>
-                    <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
-      
-                      <img src="https://www.kindpng.com/picc/m/468-4682267_utiles-escolares-shopping-cart-school-supplies-hd-png.png"
-                        class="img-fluid" alt="Sample image">
-      
-                    </div>
+                  
                   </div>
                 </div>
               </div>
@@ -66,5 +84,4 @@
       </section>
 
     </div>
-
-{% endblock %}
+  </body>
