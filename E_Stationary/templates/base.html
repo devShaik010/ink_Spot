@@ -6,24 +6,15 @@
     <title>Ink Spot _ E-Stationery</title>
     {% load static %}
     <link rel="icon" href="https://raw.githubusercontent.com/devShaik010/image-hosting/main/ink_spot_logo.svg" type="image/gif" sizes="16x16">
-    <link href="{% static 'css/main.css' %}" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="{% static 'css/main.css' %}" rel="stylesheet" integrity="sha384iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
   </head>
-
-   <style>
-      @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
-      .form-control:focus {
-      border-color: #023006;
-      box-shadow: inset 0 1px 1px rgba(187, 226, 196, 0), 0 0 8px rgba(239, 243, 241, 0.637);
-        }
-        .fontsize{
-          font-size: small;
-        }
-  </style>
-  <body style="font-family: 'Montserrat', sans-serif;  ;background-color: #ffffff;behavior:smoth;" >    
+  <body style="font-family: 'Raleway', sans-serif;" class="bg-white bg-opacity-25">    
 
     <!-- Nev baar -->
-    <nav class="navbar navbar-expand-lg bg-white  m-3 p-3  ">
+    <nav class="navbar navbar-expand-lg bg-white shadow-sm m-3 p-3  ">
       <div class="container-fluid">
         <img src="https://raw.githubusercontent.com/devShaik010/image-hosting/main/ink_spot_logo.svg" width="40" alt="">
         <a class="navbar-brand text-success " href="/" style="font-family: 'Pacifico', cursive;">Ink Spot</a>
@@ -112,7 +103,7 @@
 
         </div>
       </div>
-    </nav>
+   </nav>
 
     <!-- end nev -->
 
@@ -122,8 +113,10 @@
     
     {% endblock %}
 
-    <br>
-    <br>
+    <!-- <br>
+    <br> -->
+
+    <!-- Footer  -->
     <div class="m-1 p-3 rounded-1 mt-5 border " style="background-color: #fefeff ;">
     <footer class="py-5">
       <div class="row">
@@ -181,6 +174,7 @@
     </footer>
     
     <script src="{% static 'js/main.js' %}"></script>
-  </div>
+   </div>
+
   </body>
 </html>

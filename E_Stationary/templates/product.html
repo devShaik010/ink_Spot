@@ -2,14 +2,12 @@
 {% block content %}
 
   {% load cart %}
-
-    <div class="contain text-center w-max  mt-2 p-1 ">
+<div class="container bg-white bg-opacity-25 shadow-sm d-fluid ">
+    <div class="contain text-center w-max ">
       <div class="row mx-auto "   >
-
-        <div class="dropdown ">
-          <button class="btn btn-success  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:1px;">
-            CATEGORIES 
-          </button>
+        <div class="dropdown text-center mb-3">
+          <input placeholder="Select Any Catogery" type="search" class="btn bg-white border-success btn-primary mb-3 mt-4 rounded w-75  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="border-radius:1px;">
+        </input>
           <ul class="dropdown-menu dropdown-menu-white" >
             <li><a href="?"  class="dropdown-item w-75 text-center " >All Items</a></li>
             <hr>
@@ -18,7 +16,7 @@
             {% endfor %}
           </ul>
         </div>
- </div>
+       </div>
     </div>
 
 
@@ -27,25 +25,28 @@
     <div class="container  ">
       <div class="row">
             {% for i in product %}
-            <div class=" col-lg-3 col-6 p-1 pl-1  ">
-              <div class="mb-2 p-2 card  rounded border rouded-3  " id="{{i.id}}" width="12rem" >
-                <img src="{{i.image.url}}" class="card-img-top mx-auto text-center m-3" style="width: 7rem;" alt="..." > 
-                <div class="card-body">
-                  <p class=" h6 card-title larg mt-1 small">{{i.name}}</p>
-                    <p class="small"><span>&#8377;</span>{{i.price}}&emsp;<del class=" disabled text-secondary"><span>&#8377;</span>{{i.discount}}</del>&emsp;<b class="text-success">%2 off</b></p>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star checked"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
+            <div class=" col-lg-3 col-6 mb-2  ">
+              <div class="mb-2 card   rounded hadow rounded-4 rounded  " id="{{i.id}}" style="" >
+                <img src="{{i.image.url}}" class="card-img-top mx-auto m-0 text-center m-3 " style="width: 10rem;" alt="..." > 
+               <hr class="p-0">
+                <div class="card-body  ">
+                  <h5 class="  card-title  mt-1 ">{{i.name}}</h5>
+                    <p class="small"><del><strong><span>&#8377;</span>{{i.discount}}</del></strong>&emsp;<b class="text-success">Discountet</b></p> 
                     <p class="small">
-                    {{i.desc}}
+                      <h5><span>&#8377;</span>{{i.price}}&emsp;<del class=" disabled text-secondary">
                     </p>
+                    <div class="ms-auto text-warning">
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                      <i class="fa fa-star"></i>
+                    </div>
                 </div>
 
 
 
-                <div class="card-footer bg-white p-2">
+                <div class="card-footer border-0 border bg-white p-2">
                   {% if i|check_cart:request.session.cart %}
                   <div class="row no-gutters p-0" >
 
@@ -71,7 +72,7 @@
                   <form action="/product/#{{i.id}}" method="POST" class="btn-block p-0">
                     {% csrf_token %}
                   <input name="product" hidden type="text" value='{{i.id}}' />
-                  <input type="submit"  class="btn  border-rounded border-opacity-75 bg-success rounded-5 shadow  w-100 text-white" name="cart" style="height:2rem;font-size: small;height: auto; "  value="Add to Cart" />
+                  <input type="submit"  class="btn  border-rounded border-opacity-75  rounded-5 shadow  w-100 text-white" name="cart" style="height:2rem;font-size: small;height: auto;background-color: #178E28; "  value="Add to Cart" />
   
                   </form>
                     {% endif %}
@@ -81,8 +82,9 @@
           </div> 
           
            {% endfor %}
-
-          
+      </div>
+      </div>
+     </div>     
            
 </div>  
 <script src="https://cdn.lordicon.com/pzdvqjsp.js"></script>

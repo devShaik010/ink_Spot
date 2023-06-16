@@ -45,6 +45,13 @@ def sign_up(request):
         error_msg = None
         customer = Customer(name = name,email = email, phone = phone,password = password)
  
+        value = {
+            'name': name,
+            'email': email,
+            'phone': phone,
+            'password': password,
+            'rpassword':rpassword
+         }
 
         if customer.isname():
             error_msg = "User name is Alredy taken"
@@ -55,14 +62,21 @@ def sign_up(request):
         elif customer.isExist():
             error_msg = "Email Is Alredy Exist try to Login"
 
+        elif len(phone)!=10:
+            error_msg = "Enter Valid Phone Number"
+            
         elif customer.isnumber():
-            error_msg = "Number is Alredy register try to login"    
-        
+            error_msg = "Number is Alredy register try to login"   
+
         elif password != rpassword:
             error_msg = "Password does not macth"
         
         if error_msg:
-            return render(request, "signup.html" ,{'error' : error_msg})
+              data = {
+                'error': error_msg,
+                'values': value
+              }
+              return render(request, "signup.html" ,data)
 
 
         else:     
@@ -123,7 +137,7 @@ def book(request):
     if user_profile:
         login_button = ''
     else:
-        login_button = "LOGIN"  
+        login_button = "Login"  
 
 
     bdata = {} 
@@ -189,7 +203,7 @@ def product(request):
     if user_profile:
         login_button = None
     else:
-        login_button = "LOGIN"  
+        login_button = "Login"  
     
 
     data = {} 
