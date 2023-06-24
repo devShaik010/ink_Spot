@@ -25,9 +25,9 @@
     <div class="container  ">
       <div class="row">
             {% for i in product %}
-            <div class=" col-lg-3 col-6 mb-2  ">
-              <div class="mb-2 card   rounded hadow rounded-4 rounded  " id="{{i.id}}" style="" >
-                <img src="{{i.image.url}}" class="card-img-top mx-auto m-0 text-center m-3 " style="width: 10rem;" alt="..." > 
+            <div class=" col-lg-3 col-6 mb-0 p-1 p-sm-3 ">
+              <div class="mb-2 card " id="{{i.id}}" width="10rem"  >
+                <img src="{{i.image.url}}" class="card-img-top mx-auto m-0 text-center m-3 "  alt="..." > 
                <hr class="p-0">
                 <div class="card-body  ">
                   <h5 class="  card-title  mt-1 ">{{i.name}}</h5>
@@ -46,24 +46,23 @@
 
 
 
-                <div class="card-footer border-0 border bg-white p-2">
+                <div class="card-footer border-0 border bg-white  ">
                   {% if i|check_cart:request.session.cart %}
                   <div class="row no-gutters p-0" >
 
                     <form action="/product/#{{i.id}}" class="col-2 p-0" method="post">
                       {% csrf_token %}
                       <input name="product" hidden type="text" value='{{i.id}}' />
-                      <input type="text" hidden name="remove" class="p-0" value="true">                       
-                      <input type="submit"  value="-" class="col-2 btn  btn-success text-white">                       
+                      <input type="text" hidden name="remove"  value="true">                       
+                      <input type="submit"  value="-" class=" btn  w-50 btn-success text-white" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">                       
                     </form>
 
-                  <input name="product" hidden type="text" value='{{i.id}}' />
-                      <div class="text-center col pt-2 "><stronge>{{i|check_count:request.session.cart }}</stronge></div>
-
-                      <form action="/product/#{{i.id}}" class="col-2 p-0" method="post">
+                    <div class="text-center col pt-2 "><stronge>{{i|check_count:request.session.cart }}</stronge></div>
+                    
+                    <form action="/product/#{{i.id}}" class="col-2 p-0" method="post">
                       {% csrf_token %}
                       <input name="product" hidden type="text" value='{{i.id}}' />
-                      <input type="submit" value="+" class=" btn   btn-success text-white">
+                      <input type="submit" value="+" class=" btn  w-50  text-center btn-success text-white" style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">
                        
                       </form>
 
@@ -72,7 +71,7 @@
                   <form action="/product/#{{i.id}}" method="POST" class="btn-block p-0">
                     {% csrf_token %}
                   <input name="product" hidden type="text" value='{{i.id}}' />
-                  <input type="submit"  class="btn  border-rounded border-opacity-75  rounded-5 shadow  w-100 text-white" name="cart" style="height:2rem;font-size: small;height: auto;background-color: #178E28; "  value="Add to Cart" />
+                  <input type="submit"  class="btn  border-rounded bg-success border-opacity-75  rounded-5 shadow  w-100 text-white" name="cart" style="height:2rem;font-size: small;height: auto; "  value="Add to Cart" />
   
                   </form>
                     {% endif %}

@@ -8,7 +8,7 @@ from .models.categories import Categories
 from .models.book import Book
 from .models.b_catogeries import B_categories
 from .models.customer import Customer
-
+from .models.order import Order
 
 
 # Create your views here.
@@ -152,8 +152,6 @@ def book(request):
 
 # For Products
 def product(request):
-    
-
     if request.method == 'POST':
         pr_id = request.POST.get('product')
         remove = request.POST.get('remove')
@@ -213,5 +211,47 @@ def product(request):
     data['login']= login_button 
     return render(request, 'product.html',data)
 
+
+# Cart Page 
+def cart(request):
+    user_profile = (request.session.get('name'))
+    
+    is_empty = request.session.get('cart')
+    if is_empty == None:
+        return redirect("product")
+    else:
+        ids = list(request.session.get('cart').keys())
+        products = Product.get_product_by_id(ids)
+        print(products)
    
-     
+        data = {} 
+        data['user'] = user_profile
+        data['products'] = products
+        return render(request, 'cart.html',data)
+    
+# Check Out 
+def check_out(request):
+    if request.method == 'POST':
+        address = request.POST.get('address')
+        phone = request.POST.get('phone')
+        zone = request.POST.get('zone')
+        customer = request.session.get('customer_id')
+        cart  = request.session.get('cart')
+        products = Product.get_product_by_id(list(cart.keys()))
+        
+        for product in products:
+            order = Order(customer= Customer(id = customer),
+                          product = product,
+                          price = product.price,
+                          quantity = cart.get(str(product.id)),
+                          address = address,
+                          phone = phone,
+                          zone = zone)
+
+        order.placeOrder()
+        request.session['cart'] = {}
+        print(customer,address,phone,zone)
+    
+        # Order details
+        return redirect('cart')     
+    

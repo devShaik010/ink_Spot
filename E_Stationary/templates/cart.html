@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+    
+{% block content %}
+{% load cart %}
+
+<div class="container">
+      <div class=" rounded  pt-4">
+           <table class="table border">
+            <thead>
+                  <tr>
+                        <th scope="col">Sno.</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Item</th>
+                        <th scope="col" class="border">Price</th>
+                        <th scope="col" class="border">Quantity</th>
+                        <th scope="col">Total</th>
+                  </tr>
+            </thead>
+            <tbody>
+                  {% for product in products %}
+                  <tr class="border">
+                
+                        <td>{{forloop.counter}}</td>
+                        <td><img src="{{product.image.url}}" style="height: 80px;" alt="" class="rounded-circle"></td>
+                        <td>{{product.name}}</td>
+                        <td class="border"><span>&#8377;</span>{{product.price}}</td>
+                        <td class="border">{{product|check_count:request.session.cart}}</td>
+                        <td><span>&#8377;</span>{{product|price_total:request.session.cart}}</td>
+                  </tr>
+                  {% endfor %}
+            </tbody>
+            <tfoot>
+                   <tr>
+
+                        <th colspan="4"></th>
+                        <th colspan="" class=" bg-success text-success border bg-opacity-25">Total</th>
+                        <th ><span>&#8377;</span>{{products|total_cart_price:request.session.cart}}</th>
+                   </tr>
+            </tfoot>
+           </table>
+
+           <div class="container">
+            <div class="row">
+                  <div class="col-4 p-0">
+                        <a href="/product" class="btn w-75 btn-success text-white rounded shadow btn-success col-lg-3 float-right">Add item </a>
+                  </div>
+
+                  {% if products %}
+                  <div class="col   pl-4 ">
+                        <a href="#" class="btn w-100 btn-warning text-black rounded shadow btn-warning col-lg-3 float-right" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Check out</a>
+                  </div>
+                  {% endif %}
+            </div>
+           </div>
+           
+           
+      </div>
+</div>
+
+
+  <!-- ----------Model for imput------------ -->
+<!-- Button trigger modal -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="staticBackdropLabel">Check Out Form</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            
+            <div class="m-2 p3">
+                  <form action="/check-out/" method="post">
+                        {% csrf_token %}
+                        
+                        <div class="mb-3">
+                          <label for="" class="form-label">Address</label>
+                          <input type="text" name="address" id="" class="form-control" placeholder="" aria-describedby="helpId" required>
+                          <small id="helpId" class="text-muted">Enter current address</small>
+                        </div>
+
+                        <div class="mb-3">
+                          <label for="" class="form-label">Phone</label>
+                          <input type="tel" name="phone" id="" class="form-control" placeholder="" aria-describedby="helpId" required>
+                          <small id="helpId" class="text-muted">Enter working phoe number </small>
+                        </div>
+
+                        <select class="form-select" aria-label="Default select example" name="zone" required>
+                              <option selected>Select Zone</option>
+                              <option value="TOLICHOWKI">TOLICHOWKI</option>
+                              <option value="GACHIBOWLI">GACHIBOWLI</option>
+                              <option value="MEHDIPATNAM">MEHDIPATNAM</option>
+                        </select>
+                        <small id="helpId" class="text-muted">We deliver only these zone</small>
+
+                         <input type="submit" class= " form-control mt-2 btn btn-outline-success btn-light col-lg-6 flo" value="Check Out">
+                  </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

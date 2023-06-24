@@ -4,6 +4,7 @@ from .models.categories import Categories
 from .models.book import Book
 from .models.b_catogeries import B_categories
 from .models.customer import Customer
+from .models.order import Order
 
 
 class Book_display(admin.ModelAdmin):
@@ -22,6 +23,9 @@ class customer_display(admin.ModelAdmin):
     list_display = ['name','email']
 
 
+class order_display(admin.ModelAdmin):
+    list_display = ['customer','product','quantity','price']
+
 
 # Register your models here.
 admin.site.register(Product, product_display)
@@ -29,4 +33,5 @@ admin.site.register(Categories,categories_display)
 admin.site.register(Book,Book_display)
 admin.site.register(B_categories,B_categories_display)
 admin.site.register(Customer,customer_display)
+admin.site.register(Order,order_display)
 admin.site.site_header = "[ Admin ] Ink Spot"
