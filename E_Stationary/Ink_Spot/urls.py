@@ -10,5 +10,6 @@ urlpatterns = [
     path('book/',book),
     path('cart/',cart, name="cart"),
     path('check-out/',check_out, name="check_out"),
+    path('orders/',orders, name="orders"),
 
 ]

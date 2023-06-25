@@ -236,6 +236,7 @@ def check_out(request):
         phone = request.POST.get('phone')
         zone = request.POST.get('zone')
         customer = request.session.get('customer_id')
+        print(customer)
         cart  = request.session.get('cart')
         products = Product.get_product_by_id(list(cart.keys()))
         
@@ -248,10 +249,17 @@ def check_out(request):
                           phone = phone,
                           zone = zone)
 
-        order.placeOrder()
+            order.placeOrder()
         request.session['cart'] = {}
         print(customer,address,phone,zone)
     
         # Order details
         return redirect('cart')     
     
+
+def orders(request):
+    if request.method == "GET" or request.method == "post":
+        customer = request.session.get('customer_id')
+        orders = Order.get_orders_by_customer(customer)
+
+        return render(request, 'order.html',{'orders':orders})
