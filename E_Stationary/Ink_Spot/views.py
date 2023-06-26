@@ -33,7 +33,10 @@ def index(request):
 # For Creating User ( signup )
 def sign_up(request):
     if request.method == 'GET':
-        return render(request, "signup.html")
+        user_name = ""
+        user_check = {}
+        user_check['user'] = user_name
+        return render(request, "signup.html",user_check)
     else:
         postData = request.POST
         name = postData.get('name')
@@ -93,7 +96,10 @@ def sign_up(request):
 def login(request):
     request.session.clear()
     if request.method == "GET":
-        return render(request, 'login.html')
+        user_name = ""
+        user_check = {}
+        user_check['user'] = user_name
+        return render(request, 'login.html',user_check)
     else:
         email = request.POST.get('email')
         password = request.POST.get('password')
@@ -258,8 +264,11 @@ def check_out(request):
     
 
 def orders(request):
+    user_profile = (request.session.get('name'))
     if request.method == "GET" or request.method == "post":
         customer = request.session.get('customer_id')
-        orders = Order.get_orders_by_customer(customer)
-
-        return render(request, 'order.html',{'orders':orders})
+        order = Order.get_orders_by_customer(customer)
+        orders = {}
+        orders['orders'] = order
+        orders['user'] = user_profile
+        return render(request, 'order.html',orders)

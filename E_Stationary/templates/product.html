@@ -26,10 +26,10 @@
       <div class="row">
             {% for i in product %}
             <div class=" col-lg-3 col-6 mb-0 p-1 p-sm-3 ">
-              <div class="mb-2 card " id="{{i.id}}" width="10rem"  >
-                <img src="{{i.image.url}}" class="card-img-top mx-auto m-0 text-center m-3 "  alt="..." > 
+              <div class="mb-2 card " id="{{i.id}}" width="8rem"  >
+                <img src="{{i.image.url}}" class="card-img-top mx-auto m-0 p-0 m-3 img-fluid  w-75" alt="..." > 
                <hr class="p-0">
-                <div class="card-body  ">
+                <div class="card-body ">
                   <h5 class="  card-title  mt-1 ">{{i.name}}</h5>
                     <p class="small"><del><strong><span>&#8377;</span>{{i.discount}}</del></strong>&emsp;<b class="text-success">Discountet</b></p> 
                     <p class="small">

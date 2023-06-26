@@ -32,9 +32,9 @@
                         <td><span>&#8377;</span>{{order.quantity|multiply:order.price}}</td>
                          
                         {% if order.status %}
-                        <td><span class="badge bg-success" style="font-weight: 400;">compleated</span></td>
+                        <td class="border"><span class="badge bg-success" style="font-weight: 400;">compleated</span></td>
                         {%else%}
-                        <td><span class="badge bg-warning" style="font-weight: 400;">pending</span></td>
+                        <td class="border"><span class="badge bg-warning" style="font-weight: 400;">pending</span></td>
                         {% endif %}
                    </tr>
                   {% endfor %}
