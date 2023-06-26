@@ -2,7 +2,6 @@
     
 {% block content %}
 {% load cart %}
-
 <div class="container">
       <div class=" rounded  pt-4">
            <table class="table border">
@@ -16,6 +15,7 @@
                         <th scope="col">Total</th>
                   </tr>
             </thead>
+
             <tbody>
                   {% for product in products %}
                   <tr class="border">
@@ -31,7 +31,7 @@
             </tbody>
             <tfoot>
                    <tr>
-
+                        
                         <th colspan="4"></th>
                         <th colspan="" class=" bg-success text-success border bg-opacity-25">Total</th>
                         <th ><span>&#8377;</span>{{products|total_cart_price:request.session.cart}}</th>
@@ -47,9 +47,13 @@
 
                   {% if products %}
                   <div class="col   pl-4 ">
-                        <a href="#" class="btn w-100 btn-warning text-black rounded shadow btn-warning col-lg-3 float-right" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Check out</a>
+                        <form action="/check-out/" method="post">
+                              {% csrf_token %}
+                              <input type="text" hidden name="total" value="{{products|total_cart_price:request.session.cart}}">
+                         <input type="submit" class="btn w-100 btn-warning text-black rounded shadow btn-warning col-lg-3 float-right"  value="Check out" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                   </div>
                   {% endif %}
+            </div>
             </div>
            </div>
            
@@ -95,7 +99,7 @@
                         </select>
                         <small id="helpId" class="text-muted">We deliver only these zone</small>
 
-                         <input type="submit" class= " form-control mt-2 btn btn-outline-success btn-light col-lg-6 flo" value="Check Out">
+                         <input type="submit" class= " form-control mt-2 btn btn-outline-success btn-light col-lg-6 flo"   value="Check Out">
                   </form>
             </div>
 

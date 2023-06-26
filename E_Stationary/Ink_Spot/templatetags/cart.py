@@ -26,4 +26,5 @@ def total_cart_price(product , cart):
         sum = 0
         for p in product:
              sum += price_total(p , cart)
+        print(sum)
         return sum

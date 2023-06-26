@@ -2,7 +2,6 @@ from django.shortcuts import render , HttpResponse ,redirect
 from django.contrib.auth.models import User 
 from django.contrib.auth.hashers import check_password, make_password
 # Import packages from Models
-
 from .models.product import Product
 from .models.categories import Categories
 from .models.book import Book
@@ -10,7 +9,39 @@ from .models.b_catogeries import B_categories
 from .models.customer import Customer
 from .models.order import Order
 
+#payment gatway
+import razorpay
 
+def payment(amount , user_profile):
+      key_id = "rzp_test_YlYtdLrSGniSFi"
+      key_secret = "1WYuR9tuqgVA9kHcTIG2PwoA"
+      client = razorpay.Client(auth=(key_id,key_secret))
+
+      data = {
+                 'amount' : int(amount)*100,
+                 "currency" : "INR",
+                 "receipt" : user_profile,
+                  "notes" :
+              {   
+                    "name" : user_profile,
+                    "Payment_for" : "New order",
+              }
+
+             }
+      order = client.order.create(data=data)
+      for i in order:
+          print(i , order[i])
+
+
+      order_id = order["id"]
+      name = order['receipt']
+
+      get_order = {}
+      get_order['id'] = order_id
+      get_order['receipt'] = name
+
+      return get_order
+      
 # Create your views here.
 def index(request):
     product = Product.get_all()
@@ -228,7 +259,7 @@ def cart(request):
     else:
         ids = list(request.session.get('cart').keys())
         products = Product.get_product_by_id(ids)
-        print(products)
+        # print(products)
    
         data = {} 
         data['user'] = user_profile
@@ -237,14 +268,16 @@ def cart(request):
     
 # Check Out 
 def check_out(request):
-    if request.method == 'POST':
+    if request.method == "POST":
+        # user_profile = (request.session.get('name'))
         address = request.POST.get('address')
         phone = request.POST.get('phone')
         zone = request.POST.get('zone')
         customer = request.session.get('customer_id')
-        print(customer)
+        # print(customer)
         cart  = request.session.get('cart')
         products = Product.get_product_by_id(list(cart.keys()))
+        
         
         for product in products:
             order = Order(customer= Customer(id = customer),
@@ -256,19 +289,36 @@ def check_out(request):
                           zone = zone)
 
             order.placeOrder()
-        request.session['cart'] = {}
-        print(customer,address,phone,zone)
-    
+        user_profile = (request.session.get('name'))
+        
+        total = request.POST.get('total')
+        user_profile = (request.session.get('name'))
+        
+        order_get = payment(total,user_profile)
+
+
+        data = {}
+        data['id'] =order_get['id']
+        data['receipt'] = order_get['receipt']
+        data['total'] = total
+        data['user'] = user_profile
         # Order details
-        return redirect('cart')     
+        return render(request, 'payment.html',data)     
     
 
 def orders(request):
+    request.session['cart'] = {}
+
     user_profile = (request.session.get('name'))
     if request.method == "GET" or request.method == "post":
         customer = request.session.get('customer_id')
         order = Order.get_orders_by_customer(customer)
+        
         orders = {}
         orders['orders'] = order
         orders['user'] = user_profile
         return render(request, 'order.html',orders)
+    
+def payment_page(request):
+    return render('home')
+    
