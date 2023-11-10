@@ -1,4 +1,4 @@
-#E_Stationary
+# E_Stationary
 Its was my major project in diploma.we used Django for backend & Boostrap framwork for frontend.
 Application have all the requierd features like
 - Login - Signup
